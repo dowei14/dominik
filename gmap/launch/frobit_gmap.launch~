@@ -14,9 +14,6 @@
 
 	<group ns="fmSensors">
 	</group>
-	<group ns="gmap">
-		<node pkg="gmap" name="" type="gmap.py" />
-	</group>
 
 	<group ns="fmProcessors">
 	</group>

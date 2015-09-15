@@ -4,7 +4,3 @@ frobomind/frobomind_make /dominik/gmap
 dominik/gmap/bin/frobit_gmap
 
 rosrun map_server map_saver -f mymap
-
-rosrun map_server map_server mymap.yaml
-
-rosrun amcl amcl scan:=base_scan

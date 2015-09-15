@@ -16,7 +16,6 @@
 /frobomind/fmLib/monitors/plot_velocity
 /frobomind/fmLib/monitors/plot_propulsion_feedback_leftright
 /frobomind/fmLib/monitors/plot_pid
-/dominik/obstacle_detector
 /dominik/gmap
 /slam_gmapping/gmapping
 /slam_gmapping/slam_gmapping
