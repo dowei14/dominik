@@ -7,7 +7,7 @@
 	<param name="ticks_per_meter_left" value="677" />
 	<param name="ticks_per_meter_right" value="677" />
 
-	< lidar> 
+	<!-- lidar--> 
 	<node name="sick_tim310s01" pkg="sick_tim" type="sick_tim310s01" respawn="false" output="screen">
 	    <param name="min_ang" type="double" value="-2.35619449019" />
 	    <param name="max_ang" type="double" value="2.35619449019" />
@@ -18,12 +18,25 @@
 	    <param name="publish_datagram" type="bool" value="False" />
 	</node>
 
-	< obstacle_detector> 
+	<!--group ns="fmSensors"-->
+		<!--extract data from messages transmitted by the VectorNav VN-100 IMU-->
+		<!--node pkg="vectornav_vn100" name="imu_node"  type="vectornav_vn100_node" output="screen"  respawn="true">
+			<param name="vectornav_vn100_sub" value="/fmData/imu_rx"/>
+			<param name="imu_pub" value="/fmInformation/imu"/>
+			<param name="frame_id" value="imu_link"/>
+			<param name="use_enu" value="true"/>
+			<param name="covariance_x" value="0.001"/>
+			<param name="covariance_y" value="0.001"/>
+			<param name="covariance_z" value="0.001"/>
+		 </node>
+	</group-->
+
+	<!-- obstacle_detector--> 
 	<group ns="obstacle_detector">
 		<node pkg="obstacle_detector" name="obstacle_detector" type="obstacle_detector.py">
 			<param name="threshold_slow" value="1.0" />
 			<param name="threshold_stop" value="0.3" />
-			<param name="threshold_ignore" value="0.05" />
+			<param name="threshold_ignore" value="0.1" />
 			<param name="laser_scan" value="/scan" />
 		</node>
 	</group>
@@ -139,6 +152,23 @@
 			<param name="ramp_turn_velocity_at_angle" value="30.0" />
 			<param name="ramp_min_turn_velocity" value="0.2" />
 			<param name="stop_navigating_at_distance" value="0.01" />
+		</node>
+	</group>
+
+	<group ns="fmProcessors">
+		<!--calculate odometry based on wheel encoders and IMU yaw axis orientation-->
+		<node pkg="differential_odometry" name="differential_odometry" type="differential_odometry_node" output="screen" >
+			<param name="enc_left_sub" value="/fmInformation/encoder_left" />
+			<param name="enc_right_sub" value="/fmInformation/encoder_right" />
+			<param name="imu_sub" value="/fmInformation/imu" />
+			<param name="odom_reset_sub" value="/fmInformation/odom_reset" />
+			<param name="odom_pub" value="/fmKnowledge/pose" />
+			<param name="odom_estimate_frame" value="/odom_combined" />
+			<param name="vehicle_frame" value="base_footprint" />
+			<param name="encoder_output" value="absolute" />
+			<param name="max_ticks_per_update" value="200" />
+			<param name="yaw_angle_source" value="/imu_angular_velocity" />
+			<param name="imu_angular_velocity_yaw_axis" value="z" />
 		</node>
 	</group>
 

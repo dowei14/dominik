@@ -8,3 +8,5 @@
 /frobit_demo
 /frobomind/fmLib/computer_support/serial_nmea
 /frobomind/fmLib/computer_support/serial_string
+/frobomind/fmProcessors/platform_processing/differential_odometry
+/frobomind/fmSensors/global_sensing/imu/vectornav_vn100
