@@ -1,0 +1,10 @@
+/dominik/keyboard_control
+/dominik/obstacle_detector
+/sensors/sick_tim
+/frobomind/fmControllers/platform/sdu_frobit_v2
+/frobomind/fmLib/hmi_support/keyboard_interface
+/frobomind/fmSafety/incident_handler/basic_incident_handler
+/frobomind/fmExecutors/platform/frobit_waypoint_navigation
+/frobit_demo
+/frobomind/fmLib/computer_support/serial_nmea
+
